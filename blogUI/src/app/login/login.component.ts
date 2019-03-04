@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  iniciar(){
-
+  iniciar(nickname : string){
+    console.log(nickname);
   }
 
 }
