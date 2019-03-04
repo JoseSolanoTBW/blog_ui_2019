@@ -7,6 +7,9 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PostComponent } from './post/post.component';
+import { MenubarComponent } from './shared/menubar/menubar.component';
+import { PreferenceComponent } from './shared/preference/preference.component';
+import { DetailpostComponent } from './detailpost/detailpost.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { PostComponent } from './post/post.component';
     HomeComponent,
     LoginComponent,
     DashboardComponent,
-    PostComponent
+    PostComponent,
+    MenubarComponent,
+    PreferenceComponent,
+    DetailpostComponent
   ],
   imports: [
     BrowserModule,

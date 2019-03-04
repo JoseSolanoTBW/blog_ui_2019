@@ -1,3 +1,4 @@
+import { DetailpostComponent } from './detailpost/detailpost.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
@@ -6,14 +7,17 @@ import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     component: HomeComponent
   },
   {
     path: 'dashboard',
     component: DashboardComponent
+  },
+  {
+    path: 'detail/:id',
+    component: DetailpostComponent
   }
-
 ];
 
 @NgModule({
