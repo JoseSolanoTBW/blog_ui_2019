@@ -1,1 +1,149 @@
 /* You can add global styles to this file, and also import other style files */
+
+a {
+  text-decoration: none;
+  transition: all 0.3s ease-in-out; }
+  a:hover, a:focus {
+    text-decoration: none;
+    outline: none; }
+
+
+.primary-btn {
+  display: inline-block;
+  background: #fdc632;
+  padding: 0px 48px;
+  color: #002347;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 50px;
+  border-radius: 5px;
+  outline: none !important;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s; }
+  .primary-btn:hover {
+    background: #002347;
+    color: #fdc632; }
+
+.primary-btn2 {
+  display: inline-block;
+  background: #002347;
+  padding: 0px 48px;
+  color: #fdc632;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 48px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  outline: none !important;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s; }
+  .primary-btn2:hover {
+    background: transparent;
+    color: #002347;
+    border: 1px solid #002347; }
+
+.white_bg_btn {
+  background: #fff;
+  display: inline-block;
+  color: #002347;
+  line-height: 40px;
+  padding: 0px 28px;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  border: none; }
+  .white_bg_btn:hover {
+    background: #fdc632;
+    color: #fff; }
+
+.blog_btn {
+  border: 1px solid #eeeeee;
+  background: #f1f9ff;
+  padding: 0px 32px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+  color: #002347;
+  line-height: 34px;
+  display: inline-block; }
+  .blog_btn:hover {
+    background: #fdc632;
+    border-color: #fdc632;
+    color: #002347; }
+
+/* End Main Button Area css
+============================================================================================ */
+/*---------------------------------------------------- */
+/*----------------------------------------------------*/
+
+/* Main Title Area css
+============================================================================================ */
+.main_title {
+  text-align: center;
+  margin-bottom: 85px; }
+  @media (max-width: 991px) {
+    .main_title {
+      margin-bottom: 40px; } }
+  .main_title h2 {
+    font-size: 36px;
+    line-height: 30px;
+    font-weight: bold;
+    margin-bottom: 15px; }
+    @media (max-width: 575px) {
+      .main_title h2 {
+        font-size: 30px;
+        margin-bottom: 10px; } }
+  .main_title p {
+    font-size: 16px;
+    margin-bottom: 0px;
+    font-style: italic; }
+
+.lite_bg {
+  background: #f9f9f9; }
+
+/* End Main Title Area css
+============================================================================================ */
+
+
+.feature_area {
+  padding-bottom: 100px; }
+  @media (max-width: 991px) {
+    .feature_area {
+      padding-bottom: 40px; } }
+
+.single_feature {
+  position: relative;
+  background: #f9f9ff;
+  padding: 40px 36px;
+  margin-bottom: 30px;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s; }
+  @media (max-width: 480px) {
+    .single_feature {
+      padding: 40px 20px; } }
+  .single_feature .icon span {
+    font-size: 30px; }
+  .single_feature h4 {
+    font-size: 20px;
+    font-weight: 500; }
+  .single_feature p {
+    margin-bottom: 0px; }
+  .single_feature:hover {
+    box-shadow: 0px 10px 30px rgba(0, 35, 71, 0.1); }
