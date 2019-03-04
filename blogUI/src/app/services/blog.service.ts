@@ -9,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
 export class BlogService {
 
   constructor(private http: HttpClient) {}
-   url: 'http://localhost:8383/api/todo';
+   url: 'http://localhost:8383/api/';
 
   getTodos(): Observable<any[]> {
     return this.http.get<any[]>(this.url);
