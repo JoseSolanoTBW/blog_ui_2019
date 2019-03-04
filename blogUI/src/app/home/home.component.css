@@ -1,6 +1,12 @@
 /*----------------------------------------------------*/
 /* Home Banner Area css
 ============================================================================================ */
+.feature_area {
+  padding-bottom: 100px; }
+
+  .section_gap_top {
+    padding-top: 130px; }
+
 .home_banner_area {
   z-index: 1;
   min-height: 900px;
