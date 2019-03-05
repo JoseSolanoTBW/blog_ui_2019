@@ -12,12 +12,12 @@
         <form [formGroup] = "loging">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Nickname:</label>
-            <input #nickName type="text" class="form-control" id="recipient-name">
+            <input formControlName="nickName" type="text" class="form-control" id="recipient-name">
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="iniciar(nickName.value)">Iniciar</button>
+        <button type="button" class="btn btn-primary" (click)="iniciar()">Iniciar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>

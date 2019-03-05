@@ -16,6 +16,7 @@ export class DetailpostComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get("id");
   }
+
   private initializeForm() {
     this.comment = this.formBuilder.group({});
   }
