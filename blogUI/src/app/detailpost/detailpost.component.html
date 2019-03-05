@@ -11,92 +11,51 @@
                   </div>
                   <div class="col-lg-3  col-md-3">
                       <div class="blog_info text-right">
-                          <div class="post_tag">
-                              <a href="#">Food,</a>
-                              <a class="active" href="#">Technology</a>
+                          <div class="post_tag" *ngFor="let tag of post.preferences">
+                              <a class="active" role="button">{{tag.name}}<i class="ti-tag"></i></a>
                           </div>
                           <ul class="blog_meta list">
-                              <li><a href="#">Mark wiens<i class="ti-user"></i></a></li>
-                              <li><a href="#">12 Dec, 2017<i class="ti-calendar"></i></a></li>
-                              <li><a href="#">1.2M Views<i class="ti-heart"></i></a></li>
-                              <li><a href="#">06 Comments<i class="ti-comment"></i></a></li>
+                              <li><a role="button">{{post.owner.nickName}}<i class="ti-user"></i></a></li>
+                              <li><a role="button">{{post.date}}<i class="ti-calendar"></i></a></li>
+                              <li><a role="button">{{post.likeCount}} likes<i class="ti-heart"></i></a></li>
+                              <li><a role="button">{{post.actions.length - post.likeCount}} comentarios<i class="ti-comment"></i></a></li>
                           </ul>
                       </div>
                   </div>
                   <div class="col-lg-9 col-md-9 blog_details">
-                      <h2>Astronomy Binoculars A Great Alternative</h2>
+                      <h2>{{post.postTitle}}</h2>
                       <p class="excert">
-                          MCSE boot camps have its supporters and its detractors. Some people do not understand
-                          why you should have to spend money on boot camp when you can get the MCSE study
-                          materials yourself at a fraction.
-                      </p>
-                      <p>
-                          Boot camps have its supporters and its detractors. Some people do not understand why
-                          you should have to spend money on boot camp when you can get the MCSE study materials
-                          yourself at a fraction of the camp price. However, who has the willpower to actually
-                          sit through a self-imposed MCSE training. who has the willpower to actually sit through
-                          a self-imposed
-                      </p>
-                      <p>
-                          Boot camps have its supporters and its detractors. Some people do not understand why
-                          you should have to spend money on boot camp when you can get the MCSE study materials
-                          yourself at a fraction of the camp price. However, who has the willpower to actually
-                          sit through a self-imposed MCSE training. who has the willpower to actually sit through
-                          a self-imposed
+                          {{post.postText}}
                       </p>
                   </div>
               </div>
               <a href="#" class="blog_btn"><i class="ti-heart"></i> Me Gusta</a>
               <div class="comments-area">
-                  <h4>05 Comments</h4>
-                  <div class="comment-list">
-                      <div class="single-comment justify-content-between d-flex">
+                  <h4>{{post.actions.length - post.likeCount }} Comentarios</h4>
+                  <div class="comment-list" *ngFor="let comment of post.actions">
+                      <div class="single-comment justify-content-between d-flex" *ngIf="comment.actionType == 2">
                           <div class="user justify-content-between d-flex">
                               <div class="desc">
-                                  <h5><a href="#">Emilly Blunt</a></h5>
+                                  <h5><a role="button">{{comment.ownerAction.nickName}}</a></h5>
                                   <p class="comment">
-                                      Never say goodbye till the end comes!
+                                      {{comment.comment}}
                                   </p>
                               </div>
                           </div>
-                          <div class="reply-btn">
-                              <a href="" class="btn-reply text-uppercase">Edit</a>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="comment-list">
-                      <div class="single-comment justify-content-between d-flex">
-                          <div class="user justify-content-between d-flex">
-                              <div class="desc">
-                                  <h5><a href="#">Maria Luna</a></h5>
-                                  <p class="comment">
-                                      Never say goodbye till the end comes!
-                                  </p>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="comment-list">
-                      <div class="single-comment justify-content-between d-flex">
-                          <div class="user justify-content-between d-flex">
-                              <div class="desc">
-                                  <h5><a href="#">Ina Hayes</a></h5>
-                                  <p class="comment">
-                                      Never say goodbye till the end comes!
-                                  </p>
-                              </div>
+                          <div class="reply-btn" *ngIf="comment.ownerAction.id == user.id">
+                              <a href="" class="btn-reply text-uppercase" data-id="{{comment.id}}">Edit</a>
                           </div>
                       </div>
                   </div>
               </div>
               <div class="comment-form">
-                  <h4>Leave a Reply</h4>
+                  <h4>Deja un comentario</h4>
                   <form [formGroup] = "comment">
                       <div class="form-group">
                           <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege"
                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
                       </div>
-                      <a href="#" class="primary-btn">Post Comment</a>
+                      <a href="#" class="primary-btn">Comentar</a>
                   </form>
               </div>
           </div>
