@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormBuilder, FormGroup } from '@angular/forms';
 declare var $: any;
 
 @Component({
@@ -9,9 +9,11 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
+  loging: FormGroup;
 
   ngOnInit() {
+    this.initializeForm();
       $('#login').click(function(){
         $('#modal').modal('toggle');
       });
@@ -19,6 +21,9 @@ export class LoginComponent implements OnInit {
 
   iniciar(nickname : string){
     console.log(nickname);
+  }
+  private initializeForm() {
+    this.loging = this.formBuilder.group({});
   }
 
 }
