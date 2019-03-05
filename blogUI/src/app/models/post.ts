@@ -12,4 +12,5 @@ export class Post {
   owner: User;
   preferences: Preferences[];
   actions: Action[];
+  likeCount: number;
 }

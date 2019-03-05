@@ -1,3 +1,4 @@
+import { BlogService } from './../../services/blog.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenubarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private blogService : BlogService) { }
 
   ngOnInit() {
   }
 
+  logOut(){
+    localStorage.removeItem('user');
+  }
+
+  recommendations(){
+    this.blogService.performSearch.next(0);
+  }
+
+  myPosts(){
+    this.blogService.performSearch.next(1);
+  }
+
+  liked(){
+    this.blogService.performSearch.next(2);
+  }
 }

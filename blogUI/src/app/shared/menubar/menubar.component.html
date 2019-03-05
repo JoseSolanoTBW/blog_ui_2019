@@ -25,16 +25,16 @@
         >
           <ul class="nav navbar-nav menu_nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Recomendados</a>
+                <a class="nav-link" routerLink="/dashboard" (click)="recommendations()">Recomendados</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Mis posts</a>
+              <a class="nav-link" routerLink="/dashboard" (click)="myPosts()">Mis posts</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Liked</a>
+              <a class="nav-link" routerLink="/dashboard" (click)="liked()">Liked</a>
              </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Salir</a>
+              <a class="nav-link" routerLink="/" (click)="logOut()">Salir</a>
             </li>
           </ul>
         </div>
