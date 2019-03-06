@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Post } from '../models/post';
 import { PostSearchParams } from '../models/post-search-params';
-import { post } from 'selenium-webdriver/http';
+declare var $: any;
 
 @Component({
   selector: 'app-detailpost',
@@ -18,13 +18,16 @@ export class DetailpostComponent implements OnInit {
 
   id;
   constructor( private route : ActivatedRoute, private location : Location, private formBuilder: FormBuilder, private blogService : BlogService ) { }
-  comment: FormGroup;
+  commentForm: FormGroup;
   post: Post;
   likeCount: number;
   comentCount: number;
   user: User;
   isAlreadyLiked: boolean;
+  readyToSave = true;
   ActionPrevius: Action;
+  comments: Action[];
+  commentToShow: number;
 
   ngOnInit() {
     this.initializeForm();
@@ -34,7 +37,7 @@ export class DetailpostComponent implements OnInit {
   }
 
   private initializeForm() {
-    this.comment = this.formBuilder.group({
+    this.commentForm = this.formBuilder.group({
       commentAdded: ''
     });
   }
@@ -50,6 +53,7 @@ export class DetailpostComponent implements OnInit {
       this.isAlreadyLiked = (this.post.actions.filter(l => l.actionType === 1 && l.ownerAction.id === this.user.id)).length !== 0;
       // tslint:disable-next-line:max-line-length
       this.ActionPrevius = (this.post.actions.filter(l => l.ownerAction.id === this.user.id && (l.actionType === 1 || l.actionType === 0)))[0];
+      this.comments = this.post.actions.filter(a => a.actionType === 2);
     });
   }
 
@@ -90,10 +94,35 @@ export class DetailpostComponent implements OnInit {
 
   addComment(){
     this.comentCount = this.comentCount + 1;
+    let commentToAdd =  new Action();
+    commentToAdd.actionType = 2;
+    commentToAdd.comment =this.commentForm.value.commentAdded;
+    commentToAdd.post = this.id;
+    commentToAdd.ownerAction = this.user;
+
+    this.blogService.createAction(commentToAdd).subscribe(data => {
+      this.comments = data.actions.filter(l => l.actionType === 2);
+      $('#commentArea').val('');
+    });
   }
 
-  editComment(elementInput){
-
+  edit(element){
+    this.readyToSave = false;
+    this.commentToShow = $(element).attr('id');
   }
 
+  guardar(element){
+    this.readyToSave = true;
+    this.commentToShow = $(element).attr('id');
+    const commenToSave = $('#input-comment-' + this.commentToShow );
+    let actionToSave = new Action();
+    actionToSave.id = this.commentToShow;
+    actionToSave.actionType = 2;
+    actionToSave.comment = commenToSave.val();
+    this.blogService.updateAction(actionToSave).subscribe(data => {
+      this.blogService.getActions(this.id).subscribe(response => {
+        this.comments = response.filter(a => a.actionType === 2);
+      })
+    });
+  }
 }

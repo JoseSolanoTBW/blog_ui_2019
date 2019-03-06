@@ -45,4 +45,9 @@ export class BlogService {
   updateAction(postAction: Action): Observable<Action>{
     return this.http.put<Action>('http://localhost:8383/api/action/update', postAction);
   }
+
+  getActions(id: number): Observable<Action[]>{
+    return this.http.get<Action[]>('http://localhost:8383/api/action//by-post?id=' + id);
+  }
+
 }

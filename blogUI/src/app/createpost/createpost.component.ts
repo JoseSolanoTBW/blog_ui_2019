@@ -40,8 +40,7 @@ export class CreatepostComponent implements OnInit {
     this.post.postTitle = this.postForm.value.postTitle;
     this.post.preferences = seletedPref;
     this.blogService.createPost(this.post).subscribe(data =>{
-      $( '.modal-backdrop' ).remove();
-      $('body').removeClass('modal-open');
+      $('#create-post').modal('hide');
       this.blogService.isSaved.next(true);
     });
   }

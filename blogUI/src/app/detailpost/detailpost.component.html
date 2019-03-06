@@ -33,28 +33,30 @@
               <a role="button" class="blog_btn" (click)="addLike()" *ngIf="!isAlreadyLiked"><i class="ti-heart"></i> Me Gusta</a>
               <div class="comments-area">
                   <h4>{{comentCount }} Comentarios</h4>
-                  <div class="comment-list" *ngFor="let comment of post.actions">
-                      <div class="single-comment justify-content-between d-flex" *ngIf="comment.actionType == 2">
-                          <div class="user justify-content-between d-flex">
-                              <div class="desc">
+                  <div class="comment-list" *ngFor="let comment of comments">
+                      <div class="single-comment justify-content-between d-flex">
+                          <div class="user justify-content-between d-flex open-horizon">
+                              <div class="desc open-horizon">
                                   <h5><a role="button">{{comment.ownerAction.nickName}}</a></h5>
-                                  <p class="comment" id="comment-{{comment.id}}">
+                                  <p class="comment" id="comment-{{comment.id}}" *ngIf="readyToSave || commentToShow != comment.id">
                                       {{comment.comment}}
                                   </p>
+                                  <input id="input-comment-{{comment.id}}" type="text" value="{{comment.comment}}" class="form-control open-horizon" *ngIf="!readyToSave && commentToShow == comment.id">
                               </div>
                           </div>
                           <div class="reply-btn" *ngIf="comment.ownerAction.id == user.id">
-                              <a #edit role="button" class="btn-reply text-uppercase" data-id="{{comment.id}}" (click)="editComment(edit)" >Edit</a>
+                              <a #editor role="button" class="btn-reply text-uppercase" data-id="{{comment.id}}" (click)="edit(editor)" *ngIf="readyToSave || commentToShow != comment.id">Editar</a>
+                              <a #editor role="button" class="btn-reply text-uppercase" data-id="{{comment.id}}" (click)="guardar(editor)" *ngIf="!readyToSave && commentToShow == comment.id">Guardar</a>
                           </div>
                       </div>
                   </div>
               </div>
               <div class="comment-form">
                   <h4>Deja un comentario</h4>
-                  <form [formGroup] = "comment">
+                  <form [formGroup] = "commentForm">
                       <div class="form-group">
                           <textarea formControlName="commentAdded" class="form-control mb-10" rows="5" name="message" placeholder="Agregar comentario"
-                              onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                              onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required="" id="commentArea"></textarea>
                       </div>
                       <a role="button" class="primary-btn" (click)="addComment()" >Comentar</a>
                   </form>
