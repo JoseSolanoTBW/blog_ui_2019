@@ -12,10 +12,16 @@
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Titulo:</label>
             <input formControlName="postTitle" type="text" class="form-control" id="recipient-name">
+            <div class="alert alert-danger" *ngIf="postTitle.errors && submmited">
+              <strong>Error!</strong> Ingrese el titulo.
+            </div>
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Texto:</label>
             ​<textarea formControlName="postText" class="form-control" id="txtArea" rows="10" cols="70"></textarea>
+            <div class="alert alert-danger" *ngIf="postText.errors && submmited">
+              <strong>Error!</strong> Ingrese el texto.
+            </div>
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Preferencias:</label>

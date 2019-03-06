@@ -127,6 +127,13 @@ a {
 .lite_bg {
   background: #f9f9f9; }
 
+  .header_area .navbar {
+    background: transparent;
+    padding: 0px;
+    border: 0px;
+    border-radius: 0px;
+}
+
 /* End Main Title Area css
 ============================================================================================ */
 

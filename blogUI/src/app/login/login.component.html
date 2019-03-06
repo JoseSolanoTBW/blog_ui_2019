@@ -13,6 +13,12 @@
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Nickname:</label>
             <input formControlName="nickName" type="text" class="form-control" id="recipient-name">
+            <div class="alert alert-danger" *ngIf="nickName.errors && sumbited">
+              <strong>Error!</strong> Ingrese el nickname.
+            </div>
+            <div class="alert alert-danger" *ngIf="errorLogin">
+              <strong>Error!</strong> El nickname no esta registrado
+            </div>
           </div>
         </form>
       </div>

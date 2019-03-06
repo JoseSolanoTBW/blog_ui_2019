@@ -34,6 +34,7 @@ export class SinginComponent implements OnInit {
     this.blogService.createUser(this.user).subscribe(data => {
       localStorage.setItem('user', JSON.stringify(data));
       this.go();
+      this.blogService.performSearch.next(0);
     })
   }
 

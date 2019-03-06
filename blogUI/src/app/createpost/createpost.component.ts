@@ -2,7 +2,7 @@ import { Post } from './../models/post';
 import { TypeaheadComponent } from './../shared/typeahead/typeahead.component';
 import { BlogService } from './../services/blog.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { User } from '../models/user';
 
 declare var $: any;
@@ -18,6 +18,7 @@ export class CreatepostComponent implements OnInit {
 
   postForm: FormGroup;
   private post: Post;
+  submmited = false;
 
   @ViewChild(TypeaheadComponent) autoComplete;
 
@@ -31,6 +32,10 @@ export class CreatepostComponent implements OnInit {
   }
 
   guardar(){
+    this.submmited = true;
+    if (this.postForm.invalid) {
+      return;
+    }
     let seletedPref = this.autoComplete.getPrefrencesSelected();
     this.post = new Post();
 
@@ -39,11 +44,18 @@ export class CreatepostComponent implements OnInit {
     this.post.postText = this.postForm.value.postText;
     this.post.postTitle = this.postForm.value.postTitle;
     this.post.preferences = seletedPref;
+
     this.blogService.createPost(this.post).subscribe(data =>{
       $('#create-post').modal('hide');
       this.blogService.isSaved.next(true);
+      this.postForm.reset();
+      this.submmited = false;
     });
   }
+
+  get postTitle() { return this.postForm.get('postTitle'); }
+
+  get postText() { return this.postForm.get('postText'); }
 
   private getUser(){
     return JSON.parse(localStorage.getItem('user')) as User;
@@ -51,8 +63,8 @@ export class CreatepostComponent implements OnInit {
 
   private initializeForm() {
     this.postForm = this.formBuilder.group({
-      postTitle: '',
-      postText: ''
+      postTitle: new FormControl('', [Validators.required]),
+      postText: new FormControl('', [Validators.required])
     });
   }
 
