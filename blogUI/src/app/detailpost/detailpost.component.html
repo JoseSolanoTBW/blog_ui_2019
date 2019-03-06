@@ -6,7 +6,7 @@
               <div class="single-post row">
                   <div class="col-lg-12">
                       <div class="feature-img">
-                          <img class="img-fluid" src="../../assets/images/m-blog-1.jpg" alt="">
+                          <img class="img-fluid" src="{{post.imageSrc}}" alt="">
                       </div>
                   </div>
                   <div class="col-lg-3  col-md-3">
@@ -17,8 +17,8 @@
                           <ul class="blog_meta list">
                               <li><a role="button">{{post.owner.nickName}}<i class="ti-user"></i></a></li>
                               <li><a role="button">{{post.date}}<i class="ti-calendar"></i></a></li>
-                              <li><a role="button">{{post.likeCount}} likes<i class="ti-heart"></i></a></li>
-                              <li><a role="button">{{post.actions.length - post.likeCount}} comentarios<i class="ti-comment"></i></a></li>
+                              <li><a role="button">{{likeCount}} likes<i class="ti-heart"></i></a></li>
+                              <li><a role="button">{{comentCount}} comentarios<i class="ti-comment"></i></a></li>
                           </ul>
                       </div>
                   </div>
@@ -29,21 +29,22 @@
                       </p>
                   </div>
               </div>
-              <a href="#" class="blog_btn"><i class="ti-heart"></i> Me Gusta</a>
+              <a role="button" class="blog_btn" (click)="addLike()" *ngIf="isAlreadyLiked"><i class="ti-heart"></i> Ya no Me Gusta</a>
+              <a role="button" class="blog_btn" (click)="addLike()" *ngIf="!isAlreadyLiked"><i class="ti-heart"></i> Me Gusta</a>
               <div class="comments-area">
-                  <h4>{{post.actions.length - post.likeCount }} Comentarios</h4>
+                  <h4>{{comentCount }} Comentarios</h4>
                   <div class="comment-list" *ngFor="let comment of post.actions">
                       <div class="single-comment justify-content-between d-flex" *ngIf="comment.actionType == 2">
                           <div class="user justify-content-between d-flex">
                               <div class="desc">
                                   <h5><a role="button">{{comment.ownerAction.nickName}}</a></h5>
-                                  <p class="comment">
+                                  <p class="comment" id="comment-{{comment.id}}">
                                       {{comment.comment}}
                                   </p>
                               </div>
                           </div>
                           <div class="reply-btn" *ngIf="comment.ownerAction.id == user.id">
-                              <a href="" class="btn-reply text-uppercase" data-id="{{comment.id}}">Edit</a>
+                              <a #edit role="button" class="btn-reply text-uppercase" data-id="{{comment.id}}" (click)="editComment(edit)" >Edit</a>
                           </div>
                       </div>
                   </div>
@@ -52,10 +53,10 @@
                   <h4>Deja un comentario</h4>
                   <form [formGroup] = "comment">
                       <div class="form-group">
-                          <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege"
+                          <textarea formControlName="commentAdded" class="form-control mb-10" rows="5" name="message" placeholder="Agregar comentario"
                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
                       </div>
-                      <a href="#" class="primary-btn">Comentar</a>
+                      <a role="button" class="primary-btn" (click)="addComment()" >Comentar</a>
                   </form>
               </div>
           </div>

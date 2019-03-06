@@ -1,3 +1,4 @@
+import { Action } from './../models/action';
 import { Post } from './../models/post';
 import { Preferences } from './../models/preferences';
 import { Injectable } from '@angular/core';
@@ -15,6 +16,7 @@ export class BlogService {
   constructor(private http: HttpClient) {}
   public url: 'http://localhost:8383/api/';
   public performSearch: BehaviorSubject<any> = new BehaviorSubject(null);
+  public isSaved: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   getAllPreferences(): Observable<Preferences[]> {
     return this.http.get<Preferences[]>('http://localhost:8383/api/preference/all');
@@ -30,5 +32,17 @@ export class BlogService {
 
   getPosts(postParameters: PostSearchParams): Observable<Post[]>{
     return this.http.post<Post[]>('http://localhost:8383/api/post/get-posts', postParameters);
+  }
+
+  createPost(postUser: Post): Observable<Post>{
+    return this.http.post<Post>('http://localhost:8383/api/post/create', postUser);
+  }
+
+  createAction(postAction: Action): Observable<Post>{
+    return this.http.post<Post>('http://localhost:8383/api/action/create', postAction);
+  }
+
+  updateAction(postAction: Action): Observable<Action>{
+    return this.http.put<Action>('http://localhost:8383/api/action/update', postAction);
   }
 }

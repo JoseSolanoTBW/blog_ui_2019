@@ -25,6 +25,11 @@ export class DashboardComponent implements OnInit {
     this.blogService.performSearch.subscribe( id => {
       this.performSearch(id);
     });
+    this.blogService.isSaved.subscribe(added => {
+      if (added){
+        this.performSearch(1);
+      }
+    });
   }
 
   performSearch(type: number){
@@ -49,7 +54,6 @@ export class DashboardComponent implements OnInit {
 
     this.blogService.getPosts(this.searchParams).subscribe(data =>{
       this.postList = data;
-      console.log(this.postList);
     });
   }
 

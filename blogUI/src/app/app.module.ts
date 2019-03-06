@@ -16,6 +16,7 @@ import { TypeaheadModule } from  'node_modules/ngx-type-ahead';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { SinginComponent } from './singin/singin.component';
+import { CreatepostComponent } from './createpost/createpost.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SinginComponent } from './singin/singin.component';
     PreferenceComponent,
     DetailpostComponent,
     TypeaheadComponent,
-    SinginComponent
+    SinginComponent,
+    CreatepostComponent
   ],
   imports: [
     BrowserModule,

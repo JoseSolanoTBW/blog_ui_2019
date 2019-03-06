@@ -1,3 +1,4 @@
+import { Action } from './../models/action';
 import { User } from './../models/user';
 import { BlogService } from './../services/blog.service';
 import { Component, OnInit } from '@angular/core';
@@ -19,7 +20,11 @@ export class DetailpostComponent implements OnInit {
   constructor( private route : ActivatedRoute, private location : Location, private formBuilder: FormBuilder, private blogService : BlogService ) { }
   comment: FormGroup;
   post: Post;
+  likeCount: number;
+  comentCount: number;
   user: User;
+  isAlreadyLiked: boolean;
+  ActionPrevius: Action;
 
   ngOnInit() {
     this.initializeForm();
@@ -29,7 +34,9 @@ export class DetailpostComponent implements OnInit {
   }
 
   private initializeForm() {
-    this.comment = this.formBuilder.group({});
+    this.comment = this.formBuilder.group({
+      commentAdded: ''
+    });
   }
 
   getDataForPost(){
@@ -38,10 +45,55 @@ export class DetailpostComponent implements OnInit {
 
     this.blogService.getPosts(params).subscribe(data =>{
       this.post = data[0];
+      this.likeCount = this.post.likeCount;
+      this.comentCount = this.post.commentCount;
+      this.isAlreadyLiked = (this.post.actions.filter(l => l.actionType === 1 && l.ownerAction.id === this.user.id)).length !== 0;
+      // tslint:disable-next-line:max-line-length
+      this.ActionPrevius = (this.post.actions.filter(l => l.ownerAction.id === this.user.id && (l.actionType === 1 || l.actionType === 0)))[0];
     });
   }
 
   private getUser(){
     this.user = JSON.parse(localStorage.getItem('user')) as User;
   }
+
+  addLike(){
+    let useUpdate = true;
+    if (typeof this.ActionPrevius === 'undefined') {
+      this.ActionPrevius = new Action();
+      useUpdate = false;
+    }
+    this.ActionPrevius.post = this.id;
+    this.ActionPrevius.ownerAction = this.user;
+
+    if (this.isAlreadyLiked){
+      this.isAlreadyLiked = false;
+      this.likeCount = this.likeCount - 1;
+      this.ActionPrevius.actionType = 0;
+    } else {
+      this.isAlreadyLiked = true;
+      this.likeCount = this.likeCount + 1;
+      this.ActionPrevius.actionType = 1;
+    }
+
+    if (useUpdate){
+      this.blogService.updateAction(this.ActionPrevius).subscribe(data => { this.ActionPrevius = data; } );
+    } else {
+      this.blogService.createAction(this.ActionPrevius).subscribe(data => {
+        const result = data;
+        this.ActionPrevius = (result.actions.find(l => l.ownerAction.id === this.user.id && l.actionType === 1 ));
+      });
+    }
+
+
+  }
+
+  addComment(){
+    this.comentCount = this.comentCount + 1;
+  }
+
+  editComment(elementInput){
+
+  }
+
 }

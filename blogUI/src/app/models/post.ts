@@ -13,4 +13,5 @@ export class Post {
   preferences: Preferences[];
   actions: Action[];
   likeCount: number;
+  commentCount: number;
 }
